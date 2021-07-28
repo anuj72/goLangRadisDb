@@ -17,7 +17,7 @@ func getClientData(myquery string) string {
 	}
 	q := req.URL.Query()
 	q.Add("input", myquery)
-	q.Add("key", "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+	q.Add("key", "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
 	req.URL.RawQuery = q.Encode()
 	//fmt.Println(req.URL.String())
 	resp, err := http.Get(req.URL.String())
@@ -29,6 +29,5 @@ func getClientData(myquery string) string {
 	if err != nil {
 		log.Fatalln(err)
 	}
-	sb := string(body)
-	return sb
+	return string(body)
 }
