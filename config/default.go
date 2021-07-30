@@ -7,7 +7,7 @@ type configRepository struct {
 	Enviornment string `env:"enviornment" envdefault:"development"`
 
 	// Google Places key
-	GooglePlacesKey string `env:"services.google.places.key" envdefault:"AIzaSyCAIMEd2qvBnJnuenVXNq0sCGEeICx96K4"`
+	GooglePlacesKey string `env:"services.google.places.key" envdefault:"XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX4"`
 
 	// Redis Connection Url
 	RedisConnectionURL string `env:"redis.connection.url" envdefault:"localhost:6379"`
