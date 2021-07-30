@@ -1,6 +1,8 @@
 package main
 
 import (
+	"RedisProject/controller"
+	"RedisProject/database/redis"
 	"encoding/json"
 	"fmt"
 	"github.com/gorilla/mux"
@@ -16,18 +18,16 @@ func main() {
 }
 
 func getLocatiopns(w http.ResponseWriter, r *http.Request) {
-	fmt.Println("hello")
 	query := r.URL.Query()
 	filters := query.Get("filters")
 	fmt.Println(filters)
 	var myquery = filters
-	var LocalDb = getRedishData(myquery)
+	var LocalDb = redis.GetRedisData(myquery)
 	if len(LocalDb) > 0 {
 		json.NewEncoder(w).Encode(LocalDb)
 	} else {
-		var clientData = getClientData(myquery)
-		setRedishData(clientData, myquery)
-		fmt.Println("yyyy", clientData)
+		var clientData = controller.GetClientData(myquery)
+		redis.SetRedisData(clientData, myquery)
 		json.NewEncoder(w).Encode(clientData)
 	}
 }

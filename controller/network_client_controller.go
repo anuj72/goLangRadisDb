@@ -1,13 +1,16 @@
-package main
+package controller
 
 import (
+	"RedisProject/config"
 	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
 )
 
-func getClientData(myquery string) string {
+var key string = config.NewRepository().GooglePlacesKey()
+
+func GetClientData(myquery string) string {
 	req, err := http.NewRequest("GET",
 		"https://maps.googleapis.com/maps/api/place/autocomplete/json",
 		nil)
@@ -17,7 +20,7 @@ func getClientData(myquery string) string {
 	}
 	q := req.URL.Query()
 	q.Add("input", myquery)
-	q.Add("key", "XXXXXXXXXXXXXXXXXXXXXXXXXXXXX")
+	q.Add("key", key)
 	req.URL.RawQuery = q.Encode()
 	//fmt.Println(req.URL.String())
 	resp, err := http.Get(req.URL.String())
